@@ -11,17 +11,36 @@ function App() {
   let [update,setUpdate] = useState(false)
   let [loader,setLoader] = useState(false)
   let [updateIndex,setUpdataIndex] =useState("")
+  let [errorMessage,setErrorMessage] =useState("")
 
   let handleAddTodo =()=>{
-    setLoader(true)
-    set(push(ref(db, 'todo')), {
-      userName : name,
-      userDes  : des
-    }).then(()=>{
-      setLoader(false)
-      setName("")
-      setDes("")
-    })
+  //  if(!name){
+  //   setErrorMessage("Please Enter Name")
+  //  }else if(!des){
+  //   setErrorMessage("Please Enter Des")
+  //  }else{
+     
+  //  }
+ if(name&&des){
+   set(push(ref(db, 'todo')), {
+     userName : name,
+     userDes  : des
+   }).then(()=>{
+     setLoader(false)
+     setName("")
+     setDes("")
+     setErrorMessage("")
+   })
+ }else{
+  if(!(name||des)){
+    setErrorMessage("Please Enter both")
+  }else if(!name){
+    setErrorMessage("Please Enter Name")
+  }else {
+    setErrorMessage("Please Enter Des")
+  }
+ }
+   
   }
 
   useEffect(()=>{
@@ -53,7 +72,7 @@ function App() {
       userName : name,
       userDes  : des
     }).then(()=>{
-
+      
     })
   }
 
@@ -86,6 +105,10 @@ function App() {
         <button onClick={handleAddTodo} className='px-4 py-2 text-white  bg-blue-600 rounded-r-sm'>Add todo</button>
       
 
+    }
+    {
+    errorMessage && 
+    <h1 className='text-[red] pl-96 text-sm'>{errorMessage} !</h1>
     }
      <div className='flex gap-10 flex-wrap pt-10'>
       {
