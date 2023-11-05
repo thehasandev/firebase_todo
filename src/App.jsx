@@ -87,37 +87,49 @@ function App() {
 
   return (
     <div className='max-w-7xl mx-auto pt-5'>
-      <label className='font-medium text-lg '>Name : </label>
-      <input value={name} onChange={(e)=>{setName(e.target.value)}} className='border border-black/40 px-2 py-2' type="text" />
-      <label className='font-medium text-lg '> Des : </label>
-      <input  value={des} onChange={(e)=>{setDes(e.target.value)}} className='border border-black/40 px-2 py-2' type="text" />
-     {
-      update ? 
-      <button onClick={handleUpdateTodo} className='px-4 py-2 text-white  bg-green-600 rounded-r-sm'>Update todo</button>
-      :
-      
-        loader ?
-          <button>
-            <BallTriangle
-             height={30}
-             width={30}
-             radius={15}
-             color="#4fa94d"
-             ariaLabel="ball-triangle-loading"
-             wrapperClass="ml-5"
-             wrapperStyle=""
-             visible={true}
-            />
-          </button>
-        :
-        <button onClick={handleAddTodo} className='px-4 py-2 text-white  bg-blue-600 rounded-r-sm'>Add todo</button>
-      
+      <div className='flex justify-center'>
+        <div className='md:w-full'>
+            <div>
+              <label  className='text-lg font-semibold'>Name :</label><br />
+              <input value={name} onChange={(e)=>{setName(e.target.value)}} className='border md:w-1/3 rounded-[5px] border-black/40 px-2 py-2' type="text" />
+            </div>
+            <div className='my-4'>
+              <label className='text-lg font-semibold'>Description :</label><br />
+              <textarea  value={des} onChange={(e)=>{setDes(e.target.value)}} className='border  rounded-[5px] md:w-1/3 border-black/40 px-2 py-2' type="text" />
+            </div>
+            <div className='flex items-center gap-x-10'>
+                  {
+                    update ? 
+                    <button onClick={handleUpdateTodo} className='px-4 py-2 text-white  bg-green-600 rounded-r-sm'>Update Todo</button>
+                    :
+                    
+                      loader ?
+                        <button>
+                          <BallTriangle
+                          height={30}
+                          width={30}
+                          radius={15}
+                          color="#ffffff"
+                          ariaLabel="ball-triangle-loading"
+                          wrapperClass="ml-5"
+                          wrapperStyle=""
+                          visible={true}
+                          />
+                        </button>
+                      :
+                      <button onClick={handleAddTodo} className='px-4 py-2 text-white  bg-blue-600 rounded-r-sm'>Add Todo</button>
+                  }
+                    {
+                      errorMessage && 
+                      <h1 className='text-[red]  text-sm'>{errorMessage} !</h1>
+                    }
+            </div>
 
-    }
-    {
-    errorMessage && 
-    <h1 className='text-[red] pl-96 text-sm'>{errorMessage} !</h1>
-    }
+        </div>
+      </div>
+    
+  
+ 
     {
      todoList.length > 0 ?
      <h1></h1>
