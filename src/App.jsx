@@ -15,6 +15,7 @@ function App() {
 
   let handleAddTodo =()=>{
   if(name&&des){
+    setLoader(true)
    set(push(ref(db, 'todo')), {
      userName : name,
      userDes  : des
@@ -69,6 +70,7 @@ function App() {
         setErrorMessage("")
         setName("")
         setDes("")
+    
       })
 
     }else{
@@ -115,6 +117,12 @@ function App() {
     {
     errorMessage && 
     <h1 className='text-[red] pl-96 text-sm'>{errorMessage} !</h1>
+    }
+    {
+     todoList.length > 0 ?
+     <h1></h1>
+     :
+     <h1 className='text-lg pt-10 pl-5'>No Post</h1>
     }
      <div className='flex gap-10 flex-wrap pt-10'>
       {
