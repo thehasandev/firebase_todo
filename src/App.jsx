@@ -38,9 +38,10 @@ function App() {
       <label className='font-medium text-lg '> Des : </label>
       <input value={des} onChange={(e)=>{setDes(e.target.value)}} className='border border-black/40 px-2 py-2' type="text" />
       <button onClick={handleAddTodo} className='px-4 py-2 text-white  bg-blue-600 rounded-r-sm'>Add todo</button>
+     
      {
       todoList.map((item)=>(
-        <div className='' key={item.id}>
+        <div key={item.id}>
           <h1 className='text-3xl font-semibold text-black'>{item.userName}</h1>
           <p className='text-lg my-1 text-black'>{item.userDes}</p>
           <button className='px-4 py-1 text-lg text-white bg-blue-600 rounded-sm mr-2'>Edit</button>
