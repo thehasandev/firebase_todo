@@ -1,11 +1,20 @@
 import React, { useState } from 'react'
+import { getDatabase, ref, set,push } from "firebase/database";
 
 function App() {
+  const db = getDatabase();
   let [name,setName] = useState("")
   let [des,setDes] = useState("")
 
   let handleAddTodo =()=>{
-    console.log(name,des);
+    set(push(ref(db, 'todo')), {
+      userName : name,
+      userDes  : des
+    }).then(()=>{
+      console.log("Done");
+      setName("")
+      setDes("")
+    })
   }
   return (
     <div className='m-5'>
