@@ -50,7 +50,11 @@ function App() {
   },[])
 
   let handleDelete =(item)=>{
-    remove(ref(db, 'todo/'+item.id))
+    setErrorMessage("")
+    remove(ref(db, 'todo/'+item.id)).then(()=>{
+      setErrorMessage("")
+    })
+
   }
 
   let handleEdit =(item)=>{
@@ -58,6 +62,7 @@ function App() {
    setName(item.userName)
    setDes(item.userDes)
    setUpdataIndex(item.id)
+   setErrorMessage("")
   }
 
   let handleUpdateTodo =()=>{
