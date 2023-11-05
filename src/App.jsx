@@ -45,10 +45,11 @@ function App() {
   } 
 
   let handleUpdateTodo =()=>{
-    set(ref(db, 'todo/'+updateIndex), {
+    set(ref(db, 'todo/'+ updateIndex), {
       userName : name
       }).then(()=>{
-        setLoader(false)
+       setUpdate(false)
+       setName("")
       })
   }
 
