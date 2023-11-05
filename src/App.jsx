@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getDatabase, ref, set,push,onValue  } from "firebase/database";
+import { getDatabase, ref, set,push,onValue,remove  } from "firebase/database";
 import { Circles } from 'react-loader-spinner'
 function App() {
   let [name,setName] = useState("")
@@ -16,7 +16,7 @@ function App() {
     }).then(()=>{
       setLoader(false)
     })
-    
+
     setName("")
   }
 
@@ -25,11 +25,15 @@ function App() {
     onValue(starCountRef, (snapshot) => {
       let arr =[]
       snapshot.forEach((item)=>{
-        arr.push(item.val())
+        arr.push({...item.val() , id : item.key})
       })
       setNameList(arr)
     });
   },[])
+
+  let handleDelte =(item)=>{
+    remove(ref(db, 'todo/'+item.id))
+   }
 
 
   return (
@@ -57,7 +61,11 @@ function App() {
          <ol type='square'>
            {
             nameList.map((item,index)=>(
-              <li key={index}>{item.userName}</li>
+              <div key={index}>
+              <li >{item.userName}</li>
+               <button className='text-white bg-blue-700 px-4 rounded-[2px] mr-2 py-2'>Edit</button>
+               <button onClick={()=>{handleDelte(item)}} className='text-white bg-red-600 px-4 py-2 rounded-[2px]'>Delete</button>
+              </div>
             ))
            }
          </ol>
