@@ -14,14 +14,7 @@ function App() {
   let [errorMessage,setErrorMessage] =useState("")
 
   let handleAddTodo =()=>{
-  //  if(!name){
-  //   setErrorMessage("Please Enter Name")
-  //  }else if(!des){
-  //   setErrorMessage("Please Enter Des")
-  //  }else{
-     
-  //  }
- if(name&&des){
+  if(name&&des){
    set(push(ref(db, 'todo')), {
      userName : name,
      userDes  : des
@@ -67,13 +60,26 @@ function App() {
   }
 
   let handleUpdateTodo =()=>{
-    setUpdate(false)
-    set(ref(db, 'todo/'+ updateIndex), {
-      userName : name,
-      userDes  : des
-    }).then(()=>{
-      
-    })
+    if(name && des){
+      set(ref(db, 'todo/'+ updateIndex), {
+        userName : name,
+        userDes  : des
+      }).then(()=>{
+        setUpdate(false)
+        setErrorMessage("")
+        setName("")
+        setDes("")
+      })
+
+    }else{
+      if(!(name||des)){
+    setErrorMessage("Please Enter both")
+    }else if(!name){
+      setErrorMessage("Please Enter Name")
+    }else {
+      setErrorMessage("Please Enter Des")
+    }
+    }
   }
 
 
@@ -113,10 +119,10 @@ function App() {
      <div className='flex gap-10 flex-wrap pt-10'>
       {
         todoList.map((item)=>(
-          <div className='bg-white rounded-sm shadow-md border border-black/20 w-[200px] flex justify-center py-4' key={item.id}>
+          <div className='bg-white rounded-sm shadow-md border border-black/20 w-[250px] flex justify-center py-4' key={item.id}>
             <div>
               <h1 className='text-3xl font-semibold text-black'>{item.userName}</h1>
-              <p className='text-lg my-1 text-black'>{item.userDes}</p>
+              <p className='text-lg my-2 text-black'>{item.userDes}</p>
               <button onClick={()=>{handleEdit(item)}} className='px-4 py-1 text-sm text-white bg-blue-600 rounded-sm mr-2'>Edit</button>
               <button onClick={()=>{handleDelete(item)}} className='px-4 py-1 text-sm text-white bg-[red] rounded-sm '>Delete</button>
             </div>
