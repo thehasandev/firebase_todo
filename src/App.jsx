@@ -136,7 +136,7 @@ function App() {
      :
      <h1 className='text-lg pt-10 pl-5'>No Post</h1>
     }
-     <div className='flex gap-10 flex-wrap pt-10'>
+     <div className='flex gap-10 flex-wrap pt-10 justify-center md:justify-start'>
       {
         todoList.map((item)=>(
           <div className='bg-white rounded-sm shadow-md border border-black/20 w-[250px] flex justify-center py-4' key={item.id}>
