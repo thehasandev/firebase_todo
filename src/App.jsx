@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getDatabase, ref, set,push,onValue,remove  } from "firebase/database";
 import { BallTriangle } from 'react-loader-spinner'
+import "./App.css"
 
 function App() {
   const db = getDatabase();
@@ -89,7 +90,7 @@ function App() {
      <div className='flex gap-10 flex-wrap pt-10'>
       {
         todoList.map((item)=>(
-          <div className='bg-gray-500 w-[200px] flex justify-center py-4' key={item.id}>
+          <div className='bg-white rounded-sm shadow-md border border-black/20 w-[200px] flex justify-center py-4' key={item.id}>
             <div>
               <h1 className='text-3xl font-semibold text-black'>{item.userName}</h1>
               <p className='text-lg my-1 text-black'>{item.userDes}</p>
