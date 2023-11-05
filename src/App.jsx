@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getDatabase, ref, set,push,onValue  } from "firebase/database";
+import { getDatabase, ref, set,push,onValue,remove  } from "firebase/database";
 
 function App() {
   const db = getDatabase();
@@ -31,6 +31,10 @@ function App() {
 
       });
   },[])
+
+  let handleDelete =(item)=>{
+    remove(ref(db, 'todo/'+item.id))
+  }
   return (
     <div className='m-5'>
       <label className='font-medium text-lg '>Name : </label>
@@ -45,7 +49,7 @@ function App() {
           <h1 className='text-3xl font-semibold text-black'>{item.userName}</h1>
           <p className='text-lg my-1 text-black'>{item.userDes}</p>
           <button className='px-4 py-1 text-lg text-white bg-blue-600 rounded-sm mr-2'>Edit</button>
-          <button className='px-4 py-1 text-lg text-white bg-[red] rounded-sm '>Delete</button>
+          <button onClick={()=>{handleDelete(item)}} className='px-4 py-1 text-lg text-white bg-[red] rounded-sm '>Delete</button>
         </div>
       ))
      }
