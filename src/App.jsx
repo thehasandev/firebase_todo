@@ -88,7 +88,7 @@ function App() {
   return (
     <div className='max-w-7xl mx-auto pt-5'>
       <div className='flex justify-center'>
-        <div className='md:w-full'>
+        <div className='md:w-full relative'>
             <div>
               <label  className='text-lg font-semibold'>Name :</label><br />
               <input value={name} onChange={(e)=>{setName(e.target.value)}} className='border md:w-1/3 rounded-[5px] border-black/40 px-2 py-2' type="text" />
@@ -97,7 +97,7 @@ function App() {
               <label className='text-lg font-semibold'>Description :</label><br />
               <textarea  value={des} onChange={(e)=>{setDes(e.target.value)}} className='border  rounded-[5px] md:w-1/3 border-black/40 px-2 py-2' type="text" />
             </div>
-            <div className='flex items-center gap-x-10'>
+       
                   {
                     update ? 
                     <button onClick={handleUpdateTodo} className='px-4 py-2 text-white  bg-green-600 rounded-r-sm'>Update Todo</button>
@@ -121,9 +121,9 @@ function App() {
                   }
                     {
                       errorMessage && 
-                      <h1 className='text-[red]  text-sm'>{errorMessage} !</h1>
+                      <h1 className='text-[red] absolute md:right-2/3 -right-16 bottom-0  text-sm'>{errorMessage} !</h1>
                     }
-            </div>
+         
 
         </div>
       </div>
