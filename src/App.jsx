@@ -46,19 +46,19 @@ function App() {
    setUpdataIndex(item.id)
   }
 
-let handleUpdateTodo =()=>{
-  setUpdate(false)
-  set(ref(db, 'todo/'+ updateIndex), {
-    userName : name,
-    userDes  : des
-  }).then(()=>{
+  let handleUpdateTodo =()=>{
+    setUpdate(false)
+    set(ref(db, 'todo/'+ updateIndex), {
+      userName : name,
+      userDes  : des
+    }).then(()=>{
 
-  })
-}
+    })
+  }
 
 
   return (
-    <div className='m-5'>
+    <div className='max-w-7xl mx-auto pt-5'>
       <label className='font-medium text-lg '>Name : </label>
       <input value={name} onChange={(e)=>{setName(e.target.value)}} className='border border-black/40 px-2 py-2' type="text" />
       <label className='font-medium text-lg '> Des : </label>
@@ -86,17 +86,20 @@ let handleUpdateTodo =()=>{
       
 
     }
-     
-     {
-      todoList.map((item)=>(
-        <div key={item.id}>
-          <h1 className='text-3xl font-semibold text-black'>{item.userName}</h1>
-          <p className='text-lg my-1 text-black'>{item.userDes}</p>
-          <button onClick={()=>{handleEdit(item)}} className='px-4 py-1 text-lg text-white bg-blue-600 rounded-sm mr-2'>Edit</button>
-          <button onClick={()=>{handleDelete(item)}} className='px-4 py-1 text-lg text-white bg-[red] rounded-sm '>Delete</button>
-        </div>
-      ))
-     }
+     <div className='flex gap-10 flex-wrap pt-10'>
+      {
+        todoList.map((item)=>(
+          <div className='bg-gray-500 w-[200px] flex justify-center py-4' key={item.id}>
+            <div>
+              <h1 className='text-3xl font-semibold text-black'>{item.userName}</h1>
+              <p className='text-lg my-1 text-black'>{item.userDes}</p>
+              <button onClick={()=>{handleEdit(item)}} className='px-4 py-1 text-sm text-white bg-blue-600 rounded-sm mr-2'>Edit</button>
+              <button onClick={()=>{handleDelete(item)}} className='px-4 py-1 text-sm text-white bg-[red] rounded-sm '>Delete</button>
+            </div>
+          </div>
+        ))
+      }
+     </div>
     </div>
   )
 }
